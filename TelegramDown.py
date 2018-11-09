@@ -93,9 +93,8 @@ def path():
 """
 def audio(bot, update):
     print("enviando")
-    bot.send_video(chat_id=update.message.chat_id, video=open(
-        r'C:\Users\thiago.alves.EXTRABOM\PycharmProjects\WhatsDown\System Of A Down - Toxicity.mp4', 'rb')
-                   , timeout=999)
+    bot.send_audio(chat_id=update.message.chat_id, audio=open(r'C:\Users\thiago.alves.EXTRABOM\PycharmProjects\WhatsDown\a.mp3', 'rb')
+                   , timeout=999,title= 'ãbc')
     print("enviado")
 
 
@@ -135,13 +134,12 @@ def echo(bot, update):
         music = download(link)
         bot.send_message(chat_id=update.message.chat_id, text="Seu video foi baixado, estou lhe enviando o seu audio")
         print("enviando")
-        bot.send_audio(chat_id=update.message.chat_id, audio=open(music, 'rb'), title=title, timeout=999)
+        bot.send_audio(chat_id=update.message.chat_id, audio=open(music, 'rb'), title=title.encode(encoding='utf-8'), timeout=999)
         print("enviado")
         os.remove(music)
 
 
 def getTitle(link):
-    print(YouTube(link).title)
     return YouTube(link).title
 
 
