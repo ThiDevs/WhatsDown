@@ -114,11 +114,6 @@ def echo(bot, update):
                              text="Estou baixando o video \n" + getTitle(link))
             time.sleep(5)
 
-        print()
-        #pl.download_all('C:\\Users\\thiago.alves.EXTRABOM\\Desktop\\pl')
-
-
-
     elif 'https' in update.message.text:
         link = update.message.text
         title = getTitle(link)
