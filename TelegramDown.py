@@ -93,7 +93,7 @@ def path():
 """
 def audio(bot, update):
     print("enviando")
-    bot.send_audio(chat_id=update.message.chat_id, audio=open(r'C:\Users\thiago.alves.EXTRABOM\PycharmProjects\WhatsDown\a.mp3', 'rb')
+    bot.send_audio(chat_id=update.message.chat_id, audio=open(r'C:\Users\thiago.alves.EXTRABOM\PycharmProjects\WhatsDown\ãb.mp3', 'rb')
                    , timeout=999,title= 'ãbc')
     print("enviado")
 
