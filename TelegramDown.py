@@ -90,23 +90,29 @@ def path():
 
     for path in onlyfiles:
         print(path)
-
+"""
 def audio(bot, update):
     print("enviando")
     bot.send_video(chat_id=update.message.chat_id, video=open(
         r'C:\Users\thiago.alves.EXTRABOM\PycharmProjects\WhatsDown\System Of A Down - Toxicity.mp4', 'rb')
                    , timeout=999)
     print("enviado")
-"""
+
 
 def echo(bot, update):
     print(update.message.text)
     if 'playlist' in update.message.text.lower():
         from pytube import Playlist
+        import threading
+        import time
 
         pl = Playlist('https://www.youtube.com/playlist?list=PLQuDmj3ez49wUERdKxZYfoDVESQuvppH2')
         bot.send_message(chat_id=update.message.chat_id, text="São " + str(len(pl.parse_links())) + " videos \nEstou baixando :D")
-        pl.download_all()
+        for link in pl.parse_links():
+            threading.Thread(target=download,args=(link,)).start()
+            bot.send_message(chat_id=update.message.chat_id,
+                             text="Estou baixando o video \n" + getTitle(link))
+            time.sleep(5)
 
         print()
         #pl.download_all('C:\\Users\\thiago.alves.EXTRABOM\\Desktop\\pl')
@@ -136,6 +142,7 @@ def echo(bot, update):
         print("enviando")
         bot.send_audio(chat_id=update.message.chat_id, audio=open(music, 'rb'), title=title, timeout=999)
         print("enviado")
+        os.remove(music)
 
 
 def getTitle(link):
@@ -152,8 +159,6 @@ def download(link):
     print(music)
     videos.download()
     subprocess.call(['ffmpeg', '-i', videos.default_filename, music])
-
-    os.remove(music)
     os.remove(videos.default_filename)
 
     return music
